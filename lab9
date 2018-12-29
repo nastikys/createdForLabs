@@ -1,0 +1,41 @@
+//Boiko A. IP81. Var5. Lab9. 5. 	У заданому рядку символів визначити слова, довжина яких співпадає із заданою користувачем.
+#define _CRT_SECURE_NO_WARNINGS
+#include <string>
+#include <string.h>
+#include <vector>
+#include <iostream>
+
+using namespace std;
+
+
+vector<string> split(const string &text, char sep) {
+	vector<string> tokens;
+	size_t start = 0, end = 0;
+	while ((end = text.find(sep, start)) != string::npos) {
+		if (end != start) {
+			tokens.push_back(text.substr(start, end - start));
+		}
+		start = end + 1;
+	}
+	if (end != start) {
+		tokens.push_back(text.substr(start));
+	}
+	return tokens;
+}
+
+void main() 
+{
+	string text = "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.";
+	cout << "Input word length " << endl;
+	int wordLength;
+	cin >> wordLength;
+	vector<string> words = split(text, ' ');
+	for (int i = 0; i < words.size(); i++)
+	{
+		if (wordLength == words.at(i).length())
+		{
+			cout << words.at(i) << endl;
+		}
+	}
+	system("pause");
+}
